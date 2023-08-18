@@ -1,5 +1,9 @@
 import Image from "next/image";
 
 export default function Home() {
-  return <>hi, next </>;
+  return (
+    <>
+      <h2>welome</h2>hello web
+    </>
+  );
 }

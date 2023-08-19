@@ -1,8 +1,10 @@
-export default function Read({ params }: { params: { id: string } }) {
+export default async function Read({ params }: { params: { id: number } }) {
+  const response = await fetch(`http://localhost:9999/topics/${params.id}`);
+  const topic = await response.json();
   return (
     <>
-      <h2>read</h2>
-      {params.id}
+      <h2>{topic.title}</h2>
+      <p>{topic.body}</p>
     </>
   );
 }

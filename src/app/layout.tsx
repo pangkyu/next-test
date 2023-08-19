@@ -1,6 +1,7 @@
 import Link from "next/link";
 import "./globals.css";
 import type { Metadata } from "next";
+import { Control } from "./Control";
 
 export const metadata: Metadata = {
   title: "Practice",
@@ -12,7 +13,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const response = await fetch(`http://localhost:9999/topics`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}topics`, {
     cache: "no-store",
   });
   const topics = await response.json();
@@ -38,15 +39,7 @@ export default async function RootLayout({
         </ol>
 
         {children}
-        <li>
-          <Link href={"/create"}>create</Link>
-        </li>
-        <li>
-          <Link href={"/update/1"}>update</Link>
-        </li>
-        <li>
-          <input type="button" value="delete"></input>
-        </li>
+        <Control />
       </body>
     </html>
   );

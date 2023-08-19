@@ -18,6 +18,7 @@ export default function Create() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ title }),
+          next: { tags: ["collection"] },
         };
         fetch(`http://localhost:9999/topics`, options)
           .then((res) => res.json())

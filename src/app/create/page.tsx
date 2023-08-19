@@ -1,5 +1,9 @@
 "use client";
+
+import { useRouter } from "next/navigation";
+
 export default function Create() {
+  const router = useRouter();
   return (
     <form
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -7,7 +11,21 @@ export default function Create() {
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
 
-        const submittedTitle = formData.get("title");
+        const title = formData.get("title");
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title }),
+        };
+        fetch(`http://localhost:9999/topics`, options)
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+            const lastid = result.id;
+            router.push(`/read/${lastid}`);
+          });
       }}
     >
       <p>
